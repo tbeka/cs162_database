@@ -1,21 +1,21 @@
-### Health and Fitness Tracking App Overview
+## Health and Fitness Tracking App Overview
 
 The Health and Fitness Tracking App is designed to offer a comprehensive solution for users aiming to monitor and improve their health and fitness levels. It integrates various features to track workouts, nutrition, sleep patterns, and other health metrics, providing a holistic overview of the user's lifestyle and wellness.
 
 The primary objective of the app is holistic health tracking. Users will be able to log and monitor various aspects of their health, including physical activity, dietary intake, sleep quality, and key health indicators.
 
-##### Target Audience
+#### Target Audience
 
 The app targets a broad audience, ranging from fitness enthusiasts and athletes to individuals simply looking to maintain a healthy lifestyle or manage specific health conditions. It is especially beneficial for those who appreciate the convenience of having all their health-related data in one place.
 
-##### Tracked Metrics
+#### Tracked Metrics
 
 1. **Workouts:** Users can log various types of physical activities, including the nature of the workout (e.g., Cycling, Yoga, Weightlifting), its duration, distance covered (if applicable), and calories burned. The app also records the date and time of each workout session.
 2. **Nutrition:** The app allows for detailed nutrition logging, including meal types (e.g., Breakfast, Lunch, Dinner, Snack), food items consumed, and their nutritional content (calories, carbs, proteins, fats). This helps users monitor their dietary habits and nutritional intake.
 3. **Sleep:** Sleep tracking features enable users to record when they go to bed and wake up, the total duration of sleep, and the perceived quality of sleep (e.g., Poor, Average, Good). This information is crucial for understanding the impact of sleep patterns on overall health and fitness.
 4. **Health Metrics:** The app provides functionality for logging key health indicators such as heart rate, blood pressure, body weight, and body fat percentage. These metrics can be tracked over time to observe trends and correlations with lifestyle habits.
 
-##### Benefits for Users
+#### Benefits for Users
 
 - **Comprehensive Health Management**: By integrating various health and fitness metrics, the app provides a holistic view of the user's health, aiding in better decision-making and lifestyle adjustments.
 - **Motivation and Accountability**: Tracking progress towards set goals can significantly enhance motivation. The app helps users stay accountable and encourages consistency in their health and fitness efforts.
@@ -24,7 +24,7 @@ The app targets a broad audience, ranging from fitness enthusiasts and athletes 
 Overall, the Health and Fitness Tracking App aims to be a versatile and user-friendly platform, supporting users in their journey towards optimal health and fitness.
 
 
-#### Data Requirements
+### Data Requirements
 Key Data Elements:
 1. **User Data:**
 Profile Information: Includes Username, Email, PasswordHash (for security), Birthdate, and Gender. This information is fundamental for user account management and personalization of the app experience.
@@ -40,13 +40,13 @@ Sleep Records: Include the UserID, StartDateTime, and EndDateTime of each sleep 
 5. **Health Metrics:**
 Health Indicators: Cover crucial metrics like HeartRate, BloodPressure, WeightKG, and BodyFatPercentage, recorded on specific RecordDates. These metrics help in tracking general health status and fitness progress over time.
 
-##### Relationships Between Data Elements:
+#### Relationships Between Data Elements:
 
 **User-Centric Data:** Almost all data elements are tied to the UserID, emphasizing a user-centric design where each piece of information contributes to an individual's health and fitness profile. This relational approach enables personalized tracking, analysis, and recommendations.
 **Temporal Data:** Many elements are time-stamped (WorkoutDate, NutritionDate, StartDateTime and EndDateTime for sleep, RecordDate for health metrics), allowing the app to present historical data, trends, and progress over time.
 Moreover, such timely connection provides comprehensive health insights. For example, workout and nutrition data can be correlated to changes in health metrics like weight and body fat percentage. 
 
-#### Database design
+### Database design
 
 The database design visualization:
 
@@ -77,7 +77,7 @@ Transactions are applied during user registration (users.sql) and logging nutrit
 For daily nutrition entries, it's important that they are either all logged successfully or not logged at all. While not critical, the app is anticipated to support the capability of adding multiple entries simultaneously. This ensures completeness of data without the risk of loss, which could lead to potential issues down the line. For example, if an error occurs after partially adding entries, a user might attempt to re-log the entries due to the perceived failure, inadvertently creating duplicates. 
 
 
-#### Execution
+### Execution
 To execute this database, you would need the following commands:
 
 ```

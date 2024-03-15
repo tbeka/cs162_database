@@ -1,62 +1,76 @@
+-- This file contains the SQL schema for the database tables.
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Workouts;
+DROP TABLE IF EXISTS Nutrition;
+DROP TABLE IF EXISTS HealthMetrics;
+DROP TABLE IF EXISTS Sleep;
+
 -- Users Table
 CREATE TABLE Users (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID INTEGER PRIMARY KEY, -- AUTOINCREMENT is implied for INTEGER PRIMARY KEY
     Username VARCHAR(255) NOT NULL UNIQUE,
     Email VARCHAR(255) NOT NULL UNIQUE,
-    Password VARCHAR(255) NOT NULL,
-    Age INT,
-    Gender VARCHAR(50),
-    Height FLOAT,
-    Weight FLOAT,
-    FitnessGoals VARCHAR(255),
-    ActivityLevel VARCHAR(255),
-    DietaryRestrictions VARCHAR(255),
-    PrivacySettings VARCHAR(255)
+    PasswordHash VARCHAR(255) NOT NULL,
+    Birthdate DATE,
+    Gender TEXT, -- VARCHAR works too, but TEXT is more idiomatic in SQLite
+    HeightCM REAL, 
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP -- Using DATETIME
 );
+
 
 -- Workouts Table
 CREATE TABLE Workouts (
-    WorkoutID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT,
-    WorkoutType VARCHAR(255),
-    Duration INT,
-    Intensity VARCHAR(50),
-    Date DATE,
-    Notes TEXT,
+    WorkoutID INTEGER PRIMARY KEY, 
+    UserID INTEGER,
+    Type TEXT NOT NULL,
+    DurationMinutes INTEGER NOT NULL,
+    DistanceKM REAL NULL, 
+    CaloriesBurned INTEGER,
+    WorkoutDate DATE NOT NULL,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
+
 
 -- Nutrition Logs Table
-CREATE TABLE NutritionLogs (
-    MealID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT,
-    Date DATE,
-    MealType VARCHAR(255),
-    FoodItems TEXT,
-    Calories INT,
-    Macronutrients VARCHAR(255),
+CREATE TABLE Nutrition (
+    NutritionID INTEGER PRIMARY KEY, 
+    UserID INTEGER,
+    MealType TEXT, 
+    FoodItem TEXT NOT NULL,
+    Calories INTEGER NOT NULL,
+    CarbsG INTEGER NULL, -- Using INTEGER for simplicity
+    ProteinsG INTEGER NULL,
+    FatsG INTEGER NULL,
+    NutritionDate DATE NOT NULL,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
--- Sleep Patterns Table
-CREATE TABLE SleepPatterns (
-    SleepID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT,
-    StartTime DATETIME,
-    EndTime DATETIME,
-    Quality VARCHAR(50),
-    Notes TEXT,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
-);
 
 -- Health Metrics Table
 CREATE TABLE HealthMetrics (
-    MetricID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT,
-    Date DATE,
-    Weight FLOAT,
-    BMI FLOAT,
-    WaterIntake INT,
-    OtherMetrics VARCHAR(255),
+    MetricID INTEGER PRIMARY KEY,
+    UserID INTEGER,
+    RecordDate DATE NOT NULL,
+    HeartRate INTEGER NULL,
+    BloodPressure TEXT NULL, 
+    WeightKG REAL NULL,
+    BodyFatPercentage REAL NULL, 
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
+
+CREATE TABLE Sleep (
+    SleepID INTEGER PRIMARY KEY, 
+    UserID INTEGER,
+    StartDateTime DATETIME NOT NULL,
+    EndDateTime DATETIME NOT NULL,
+    Quality TEXT NOT NULL, 
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP, 
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+-- Application of indices
+CREATE INDEX userid_workout_type ON Workouts (UserID, Type);
+

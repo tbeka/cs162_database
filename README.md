@@ -80,6 +80,7 @@ For daily nutrition entries, it's important that they are either all logged succ
 #### Execution
 To execute this database, you would need the following commands:
 
+```
 .read db_scheme.sql
 .read db_insert.sql
 .read queries/user.sql
@@ -87,3 +88,4 @@ To execute this database, you would need the following commands:
 .read queries/nutrition.sql
 .read queries/health_metrics.sql
 .read queries/sleep.sql
+```

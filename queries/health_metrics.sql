@@ -9,6 +9,8 @@ SELECT * FROM HealthMetrics ORDER BY MetricID DESC LIMIT 1;
 
 
 -- Health Metrics Trend Over the Last 30 Days
+-- Fetches health metrics for the past 30 days for a specific user, focusing on weight (additional columns can be added as needed), 
+-- ordered by the record date to show the trend over time.
 SELECT RecordDate, WeightKG -- Add more columns as needed
 FROM HealthMetrics
 WHERE UserID = 4
